@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.example.m.myapplication.R
 import kotlinx.android.synthetic.main.fragment_one_first.view.*
+import java.lang.IllegalArgumentException
 
 class FirstFragment : Fragment() {
 
@@ -23,5 +24,8 @@ class FirstFragment : Fragment() {
         val value= arguments?.getString("arg")
         view.plus_one_button.text = "one fr button $value"
         return view
+    }
+
+     fun oneClick(v:View){
     }
 }
