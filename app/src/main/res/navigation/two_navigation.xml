@@ -8,11 +8,12 @@
     <fragment android:id="@+id/twoOneFragment"
               android:name="com.example.m.myapplication.two.TwoFirstFragment"
               android:label="fragment_plus_one"
-              tools:layout="@layout/fragment_first">
+              tools:layout="@layout/fragment_one_first">
         <action android:id="@+id/action_second"
                 app:destination="@id/twoSecondFragment"/>
                 <!--app:launchSingleTop="true"-->
-        <deepLink app:uri="http://www.two.com/first" android:autoVerify="true"/>
+        <deepLink app:uri="http://www.two.com/first/{arg}" android:autoVerify="true"/>
+        <argument android:name="arg" app:argType="string"/>
 
     </fragment>
 
@@ -20,6 +21,7 @@
               android:name="com.example.m.myapplication.two.TwoSecondFragment"
               android:label="fragment_blank_second"
               tools:layout="@layout/fragment_second">
-        <deepLink app:uri="http://www.two.com/two" android:autoVerify="true"/>
+        <deepLink app:uri="http://www.two.com/second/{arg}" android:autoVerify="true"/>
+        <argument android:name="arg" app:argType="string"/>
     </fragment>
 </navigation>
