@@ -1,5 +1,5 @@
 /build
-
+app/src/androidTest
 # Created by https://www.gitignore.io/api/kotlin,android,intellij+all
 # Edit at https://www.gitignore.io/?templates=kotlin,android,intellij+all
 
