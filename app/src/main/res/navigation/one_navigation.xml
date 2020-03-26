@@ -2,21 +2,23 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/two_nav_graph"
-    app:startDestination="@id/twoFirstFragment">
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/oneFragment">
 
     <fragment
-        android:id="@+id/twoFirstFragment"
-        android:name="com.example.m.myapplication.two.TwoFirstFragment"
+        android:id="@+id/oneFragment"
+        android:name="com.example.m.myapplication.one.FirstFragment"
         android:label="fragment_plus_one"
         tools:layout="@layout/fragment_blank">
+
         <action
             android:id="@+id/action_to_second"
-            app:destination="@id/twoSecondFragment" />
+            app:destination="@id/oneSecondFragment" />
         <!--app:launchSingleTop="true"-->
         <deepLink
             android:autoVerify="true"
-            app:uri="bo://two/first/{arg}" />
+            app:uri="bo://one/first/" />
+
         <argument
             android:name="arg"
             app:argType="string" />
@@ -24,32 +26,38 @@
     </fragment>
 
     <fragment
-        android:id="@+id/twoSecondFragment"
-        android:name="com.example.m.myapplication.two.TwoSecondFragment"
+        android:id="@+id/oneSecondFragment"
+        android:name="com.example.m.myapplication.one.SecondFragment"
         android:label="fragment_blank_second"
         tools:layout="@layout/fragment_blank">
 
-        <action
-            android:id="@+id/action_to_third"
-            app:destination="@id/twoThirdFragment" />
         <deepLink
             android:autoVerify="true"
-            app:uri="bo://two/first/second/third/{arg}" />
+            app:uri="bo://one/first/second/" />
+
         <argument
             android:name="arg"
             app:argType="string" />
+
+        <action
+            android:id="@+id/action_to_third"
+            app:destination="@id/oneThirdFragment" />
+
     </fragment>
 
     <fragment
-        android:id="@+id/twoThirdFragment"
-        android:name="com.example.m.myapplication.two.TwoThirdFragment"
+        android:id="@+id/oneThirdFragment"
+        android:name="com.example.m.myapplication.one.ThirdFragment"
         android:label="fragment_blank_third"
         tools:layout="@layout/fragment_blank">
+
         <deepLink
             android:autoVerify="true"
-            app:uri="bo://two/first/second/third/{arg}" />
+            app:uri="bo://one/first/second/third/{arg}" />
+
         <argument
             android:name="arg"
             app:argType="string" />
+
     </fragment>
 </navigation>

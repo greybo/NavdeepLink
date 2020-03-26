@@ -22,8 +22,8 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data
-                        android:scheme="http"
-                        android:host="www.one.com"/>
+                        android:scheme="bo"
+                        android:host="one"/>
             </intent-filter>
 
             <intent-filter>
