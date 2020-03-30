@@ -1,15 +1,27 @@
 package com.example.m.myapplication
 
+import android.app.SearchManager
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
+import com.example.m.myapplication.one.OpenDialogListener
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 const val TAG_NAV = "nav_test"
 
-class MainActivity : AppCompatActivity() {
+interface CallbackQueryVoiceListener {
+    fun callbackQuery(text: String)
+}
+
+class MainActivity : AppCompatActivity(), OpenDialogListener {
+    private val JARGON: String = "JARGON"
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,10 +41,50 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+        supportActionBar?.elevation = 0f
+//        val searchManager = getSystemService(SEARCH_SERVICE) as SearchManager
+//        search_view.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+
     }
 
     override fun onBackPressed() {
 //        super.onBackPressed()
         navController.popBackStack()
+    }
+
+    override fun onSearchRequested(): Boolean {
+        val appData = Bundle().apply {
+            putBoolean(JARGON, true)
+        }
+        startSearch(null, false, appData, false)
+        return true
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if (Intent.ACTION_SEARCH == intent?.action) {
+            val query = intent.getStringExtra(SearchManager.QUERY)
+            (getCurrentFragment() as? CallbackQueryVoiceListener)?.callbackQuery(query)
+        }
+    }
+
+    private fun getCurrentFragment(): Fragment? {
+        val navHost = supportFragmentManager.findFragmentById(R.id.main_host_fragment)
+        navHost?.let { navFragment ->
+            navFragment.childFragmentManager.primaryNavigationFragment?.let { fragment ->
+                return fragment
+            }
+        }
+        return null
+    }
+
+    override fun openSearch() {
+        onSearchRequested()
+    }
+
+    override fun openDialogVoise() {
+        val intent = Intent(Intent.CATEGORY_VOICE)
+        startActivity(intent)
     }
 }
